@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
             <a class="navbar-brand" href="{{ url_for('home_route.home') }}">
-                <i class="bi bi-house-door"></i> Home
+                <i class="bi bi-house-door"></i> Shyama Ma Sweets
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -51,7 +51,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="#contact">
             <i class="bi bi-info-circle"></i> About
         </a>
     </li>
@@ -130,7 +130,7 @@
         <div class="footer-container">
 
             <div class="footer-section">
-                <h3>My Website</h3>
+                <h3>Shyama Ma Sweets</h3>
                 <p>Your trusted platform for quality products and services.</p>
             </div>
 
@@ -138,8 +138,7 @@
             <h4>Quick Links</h4>
             <ul>
                 <li><a href="{{ url_for('home_route.home') }}">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/cart">Cart</a></li>
+                <li><a href="{{ url_for('favourite_route.favourite') }}">Favourite</a></li>
                 {% if not session.get('user') %}
                     <li><a href="/login">Login</a></li>
                 {% endif %}
@@ -150,18 +149,9 @@
             <section id="contact">
                 <h4>Contact</h4>
                 <p>Email: arponkola326@gmail.com</p>
-                <p>Phone: +91 9330157545</p>
+                <p>Phone: +91 9903054316</p>
                 <p>Location</p>
             </section>
-        </div>
-
-        <div class="footer-section">
-            <h4>Follow Us</h4>
-            <div class="footer-social">
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">YouTube</a>
-            </div>
         </div>
 
     </div>

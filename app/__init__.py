@@ -7,6 +7,7 @@ from app.model.fav import create_fav_table
 from app.model.order import create_order_table
 import os
 
+
 def create_app()->Flask:
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     IMAGE_FOLDER = os.path.join(BASE_DIR, "static", "images")
@@ -24,7 +25,6 @@ def create_app()->Flask:
                 "postgres://", "postgresql://", 1
             )
         app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-        print("DATABASE_URL = ",database_url)
         
     else:
         data_folder = os.path.join(BASE_DIR, 'data')
