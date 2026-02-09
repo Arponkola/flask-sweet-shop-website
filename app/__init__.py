@@ -9,7 +9,7 @@ import os
 
 def create_app()->Flask:
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    IMAGE_FOLDER = os.path.join(BASE_DIR, "static", "images")    
+    IMAGE_FOLDER = os.path.join(BASE_DIR, "static", "images")
     
     app = Flask(__name__)
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
@@ -30,7 +30,7 @@ def create_app()->Flask:
         data_folder = os.path.join(BASE_DIR, 'data')
         os.makedirs(data_folder, exist_ok=True)
         DB_PATH = os.path.join(data_folder, 'sweet.db')
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
+        app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["IMAGE_FOLDER"] = IMAGE_FOLDER
     app.jinja_env.filters["ist"] = format_ist
