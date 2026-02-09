@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Manage Sweets{% endblock %}
+
+{% block style %}
+<style>
+    @media (max-width: 768px) {
+        
+        table thead {
+            display: none;
+        }
+
+        table, tbody, tr, td {
+            display: block;
+            width: 100%;
+        }
+
+        tr {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        td {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            padding: 6px 10px;
+            border: none;
+        }
+
+        td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            color: #555;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block container %}
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+        <h4>🍬 Manage Sweets</h4>
+        <a href="{{ url_for('admin_sweet_route.add_sweet') }}" class="btn btn-success">
+            + Add Sweet
+        </a>
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Is Active</th>
+                <th width="180">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in sweets %}
+            <tr>
+                <td data-label="ID : ">{{ s.id }}</td>
+                <td data-label="Name : ">{{ s.name }}</td>
+                <td data-label="Price : ">₹ {{ s.price }}</td>
+                <td data-label="Stock : ">{{ s.stock }}</td>
+                <td data-label="Is Active : ">
+                    {% if s.is_active %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </td>
+                <td data-label="Action : ">
+                    <a href="{{ url_for('admin_sweet_route.update_sweet', sweet_id=s.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{ url_for('admin_sweet_route.delete_sweet', sweet_id=s.id) }}"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this sweet?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

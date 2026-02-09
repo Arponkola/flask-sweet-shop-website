@@ -1,0 +1,65 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>registration form</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/registration.css')}}">
+    </head>
+    <body>
+        <div class="form-box">
+            <h1>Create Account</h1>
+            
+            <form method='POST' action="/register/">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                        <small class="error">{{error}}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <small class="error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.mobile.label }}
+                    {{ form.mobile }}
+                    {% for error in form.mobile.errors %}
+                        <small class="error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password }}
+                    {% for error in form.password.errors %}
+                        <small class="error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password }}
+                    {% for error in form.confirm_password.errors %}
+                        <small class="error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                {{ form.submit }}
+
+                <p class="link">
+                    Already have a account?
+                    <a href="{{ url_for("login_route.login") }}">
+                        Login
+                    </a>
+                </p>
+
+            </form>
+        </div>
+    </body>
+</html>

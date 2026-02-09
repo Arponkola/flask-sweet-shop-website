@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+
+{% block container %}
+{% if users %}
+    <center><h1>Users</h1></center>
+
+<div>
+{% for user in users %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <div>
+            <b>ID:</b> {{ user.userId }} <br>
+            <b>Name:</b> {{ user.name }} <br>
+            <b>Email:</b> {{ user.email }} <br>
+            <b>Mobile:</b> {{ user.mobile_number }}<br>
+            <b>Admin:</b> {% if user.is_admin %} Yes {% else %} No {% endif %}
+        </div>
+
+        <!-- DELETE -->
+        <form action="{{ url_for('admin_route.users_delete', user_id=user.userId) }}"
+              method="POST" style="display:inline;">
+            <button type="submit" 
+                style="color:white; 
+                background-color:rgb(187, 28, 28); 
+                border:2px solid black;
+                border-radius: 5px;">
+                    Delete
+            </button>
+        </form>
+
+        <!-- EDIT -->
+        <a href="{{ url_for('admin_route.users_update', user_id=user.userId) }}">
+            <button
+                style="color:white;
+                background-color:rgb(75, 75, 121);
+                border: 2px solid black;
+                border-radius: 5px;">
+                    Edit
+            </button>
+        </a>
+    </div>
+{% endfor %}
+</div>
+
+{% else %}
+<h1>There Is No User</h1>
+{% endif %}
+{% endblock %}

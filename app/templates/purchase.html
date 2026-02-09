@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %} Purchase Page {% endblock %}
+{% block style %} 
+    <link rel="stylesheet" href={{ url_for('static', filename='css/purchase_style.css') }}>
+{% endblock %}
+
+{% block container %}
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white">
+                <h4>🛒 Purchase Items</h4>
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST" action="/confirm-order">
+                    {% if 'user' not in session %}
+                        <h5>Customer Details</h5>
+
+                        <div class="mb-2">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control" required>
+                        </div>
+                    {% endif %}
+
+
+                <table class="table table-bordered" id="cartTable">
+                <thead class="table-secondary">
+                <tr>
+                    <th>Product</th>
+                    <th>Stock</th>
+                    <th>Price</th>
+                    <th width="120">Qty</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <!-- Initial product -->
+                <tr>
+                    <td>
+                        <select class="form-select product" name="product_id[]"
+                                onchange="updateRow(this)">
+                            {% for p in products %}
+                            <option value="{{ p.id }}"
+                                data-price="{{ p.price }}"
+                                data-stock="{{ p.stock }}"
+                                {% if p.id == selected.id %}selected{% endif %}>
+                                {{ p.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td class="stock">{{ selected.stock }}</td>
+                    <td class="price">{{ selected.price }}</td>
+                    <td>
+                        <input type="number" class="form-control qty"
+                            name="qty[]" min="1" max="{{ selected.stock }}"
+                            value="1" oninput="calculateRow(this)">
+                    </td>
+                    <td class="rowTotal">0</td>
+                    <td></td>
+                </tr>
+
+                </tbody>
+                </table>
+
+                <button type="button" class="btn btn-secondary" onclick="addRow()">Add</button>
+
+                <hr>
+
+                <h5 class="text-end">Grand Total: ₹ <span id="grandTotal">0</span></h5>
+
+                <div class="text-end">
+                    <button class="btn btn-success">Confirm Order</button>
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const PRODUCTS = {{ products | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='script/purchase_script.js') }}"></script>
+{% endblock %}

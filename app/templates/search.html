@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} Search Page {% endblock %}
+
+{% block container %}
+    <div class="container mt-4">
+        {%if not products %}
+            <h2>There are No Sweet Name '{{query}}'</h2>
+        {% else %}
+            <h2>Showing Result For '{{ query }}'</h2>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card p-3">
+                            <h5>{{ product.name }}</h5>
+                            <img src="/static/images/BackGround1.jpg"
+                            style="border-radius: 10px;
+                            height: 150px;"
+                            >
+                            <p>Price: ₹{{ product.price }}</p>
+
+                            <div class="d-flex gap-2">
+                                <button class="btn fav-btn
+                                    {% if product.id in fav_ids %} btn-danger {% else %} btn-outline-danger {% endif %}" 
+                                    data-id="{{ product.id }}"
+                                    style="border-radius: 50%;
+                                    ">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                                <a href="{{ url_for('purchase_route.purchase', product_id=product.id) }}" 
+                                class="btn btn-success" id="buy-btn">
+                                    Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

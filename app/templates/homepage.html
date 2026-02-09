@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{%block title%} homepage {% endblock %}
+
+{% block container %}
+    <div class="hero-slider">
+            <div class="slides">
+                <img src="/static/images/BackGround1.jpg" class="slide">
+                <img src="/static/images/BackGround2.jpg" class="slide">
+                <img src="/static/images/BackGround3.jpg" class="slide">
+                <img src="/static/images/BackGround4.jpg" class="slide">
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+
+        <!--content-->
+
+        <div class="container mt-4">
+            <h2>Our sweets...</h2>
+            <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mb-3">
+                    <div class="card p-3">
+                        <h5>{{ product.name }}</h5>
+                        <img src="{{ url_for('static', filename='images/' + product.image) }}"
+                        style="border-radius: 10px;
+                        height: 150px;"
+                        >
+                        <p>Price: ₹{{ product.price }}</p>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn fav-btn
+                                {% if product.id in fav_ids %} btn-danger {% else %} btn-outline-danger {% endif %}" 
+                                data-id="{{ product.id }}"
+                                style="border-radius: 50%;
+                                ">
+                                <i class="bi bi-heart"></i>
+                            </button>
+
+                            <a href="{{ url_for('purchase_route.purchase', product_id=product.id) }}"
+                            class="btn btn-success" id="buy-btn">
+                                Order Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="/static/script/homepage_script.js"></script>
+{% endblock %}

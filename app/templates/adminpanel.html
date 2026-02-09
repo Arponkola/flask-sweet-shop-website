@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} AdminPanel Page {% endblock %}
+
+{% block container %}
+    <div class="container mt-5">
+
+        <h3 class="mb-4">Admin Dashboard</h3>
+
+        <div class="row">
+
+            <!-- Sweets -->
+            <div class="col-md-4">
+                <a href="{{ url_for('admin_sweet_route.all_sweets') }}" class="text-decoration-none">
+                    <div class="card shadow text-center">
+                        <div class="card-body">
+                            <h5>Sweets</h5>
+                            <h3>{{ sweets|length }}</h3>
+                            <small>Manage sweets</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Users -->
+            <div class="col-md-4">
+                <a href="{{ url_for('admin_route.users') }}" class="text-decoration-none">
+                    <div class="card shadow text-center">
+                        <div class="card-body">
+                            <h5>👥 Users</h5>
+                            <h3>{{ users|length }}</h3>
+                            <small>Manage users</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Orders -->
+            <div class="col-md-4">
+                <a href="{{ url_for('admin_order_route.orders') }}" class="text-decoration-none">
+                    <div class="card shadow text-center">
+                        <div class="card-body">
+                            <h5>🛒 Orders</h5>
+                            <h3>{{ orders|length }}</h3>
+                            <small>View orders</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

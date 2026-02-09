@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+
+{% block style %}
+<style>
+    @media (max-width: 768px) {
+        
+        table thead {
+            display: none;
+        }
+
+        table, tbody, tr, td {
+            display: block;
+            width: 100%;
+        }
+
+        tr {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        td {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            padding: 6px 10px;
+            border: none;
+        }
+
+        td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            color: #555;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block container %}
+<div class="container mt-4">
+    
+    {% if not orders %}
+        <center>
+            <h1>No Order Is Placed In History</h1>
+        </center>
+    {% else %}
+    <h4 class="mb-3">🛒 Orders History</h4>
+    
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-nowrap">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Sweet</th>
+                        <th>User</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Date And Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td data-label="Order ID :">{{ order.id }}</td>
+                            <td data-label="Sweet :">{{ order.pname }}</td>
+                            <td data-label="User :">{{ order.name }}</td>
+                            <td data-label="Mobile :">{{ order.phone }}</td>
+                            <td data-label="Email :">{{ order.email }}</td>
+                            <td data-label="Qty :">{{ order.qty }}</td>
+                            <td data-label="Price :">₹ {{ order.price_at_order }}</td>
+                            <td data-label="Date And Time :">{{ order.created_at | ist }}</td>
+                            <td data-label="Action : ">
+                                <a class="btn btn-sm btn-danger" href="{{ url_for('admin_order_route.order_history_delete', order_id=order.id) }}" >Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+# -----------------------
+# Python
+# -----------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# -----------------------
+# Virtual environment
+# -----------------------
+venv/
+env/
+.venv/
+
+# -----------------------
+# Flask / SQLAlchemy
+# -----------------------
+instance/
+*.db
+*.sqlite3
+
+# -----------------------
+# Environment variables
+# -----------------------
+.env
+.env.*
+*.env
+
+# -----------------------
+# Logs
+# -----------------------
+*.log
+
+# -----------------------
+# Uploads / Media
+# (keep if you store user uploads locally)
+# -----------------------
+uploads/
+static/uploads/
+
+# -----------------------
+# IDE / Editor
+# -----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -----------------------
+# OS files
+# -----------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------
+# Testing / Coverage
+# -----------------------
+.coverage
+htmlcov/
+.pytest_cache/
+
+# -----------------------
+# Build / cache
+# -----------------------
+build/
+dist/
+.eggs/
+*.egg-info/
+
+# -----------------------
+# Render
+# -----------------------
+.render/
